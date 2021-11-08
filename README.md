@@ -2,6 +2,8 @@
 
 Python functions for simple nonparametric testing:
 
+----
+
 There are currently two function available:
 
 sign_test()

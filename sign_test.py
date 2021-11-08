@@ -7,10 +7,8 @@ Original file is located at
     https://colab.research.google.com/drive/1T7AI_KMU1EYkqXYSMSpFOH36qt0ZA5Ky
 """
 
-import csv
-import pandas as pd
 import numpy as np
-from scipy.stats import binom, norm
+from scipy.stats import binom
 import statistics as st
 
 def sign_test(x, y = None, md = 0, alternative = "two_sided"):
@@ -57,38 +55,11 @@ def sign_test(x, y = None, md = 0, alternative = "two_sided"):
       p_val = 1 - binom.cdf(pos_count, n_adj, 0.5)
     elif alternative == "less":
       p_val = binom.cdf(pos_count, n_adj, 0.5)
+ 
+  out_dict = {"s": pos_count, 
+              "n_adj": n_adj, 
+              "n": len(x), 
+              "P_value": p_val}
 
-  print(med_count) 
   print(f"Number of positives: {pos_count} out of a sample size of {n_adj}")
-  return(print(f"P_value: {p_val}"))
-
-url = "/content/drive/MyDrive/Resources/Pine_stand.csv"
-df = pd.read_csv(url)
-
-# Test data for one sample sign test
-lob_dbh = df[df["Species"] == "Loblolly pine"].dbh.to_list()
-slash_dbh = df[df["Species"] == "Slash pine"].dbh.to_list()
-
-# Actual medians for testing
-print(df[df["Species"] == "Loblolly pine"].dbh.median())
-print(df[df["Species"] == "Slash pine"].dbh.median())
-
-# Test data for paired sign test
-test1 = norm.rvs(size = 10, loc = 5, scale = 1)
-test2 = norm.rvs(size = 10, loc = 5, scale = 1)
-test3 = norm.rvs(size = 10, loc = 7, scale = 1)
-
-sign_test(lob_dbh, md = 45)
-
-sign_test(lob_dbh, md = 30)
-
-2* (1 - binom.cdf(72, 83, 0.5))
-
-sign_test(x = test1, y = test2)
-
-sign_test(x = test1, y = test2, alternative = "greater")
-
-sign_test(x = test1, y = test2, alternative = "less")
-
-# note potentially low power in this case
-sign_test(x = test1, y = test3)
+  return out_dict

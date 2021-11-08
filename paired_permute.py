@@ -8,8 +8,6 @@ Original file is located at
 """
 
 import numpy as np
-from scipy.stats import norm
-import pandas as pd
 import random
 import math
 import statistics as st
@@ -52,24 +50,3 @@ def paired_permute(x, y, mu = 0, nsims = 999, alternative = "two_sided"):
   print(f"t_score: {t_obs}")
   print(f"P_value: {p_val}")
   return out_dict
-
-# Make test data
-
-x_10_1a = norm.rvs(size = 10, loc = 10, scale = 1)
-x_10_1b = norm.rvs(size = 10, loc = 10, scale = 1)
-x_13_1a = norm.rvs(size = 10, loc = 13, scale = 1)
-
-paired_permute(x_10_1a, x_10_1b)
-
-paired_permute(x_10_1a, x_10_1b, alternative = "greater")
-
-paired_permute(x_10_1a, x_10_1b, alternative = "less")
-
-paired_permute(x_10_1a, x_10_1b, alternative = "less", nsims =  9999)
-
-paired_permute(x_10_1a, x_13_1a)
-
-paired_permute(x_10_1a, x_13_1a, alternative = "less")
-
-paired_permute(x_10_1a, x_13_1a, alternative = "greater")
-

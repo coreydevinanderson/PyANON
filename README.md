@@ -10,7 +10,7 @@ sign_test()<br>
 paired_permute()
 
 sign_test() conducts a sign test based on the binomial distribution for a one-sample or paired design.<br>
-paired_permute() conducts a permutation test for a paired t_test.
+paired_permute() conducts a permutation test of the signficance of the t-statistic for a paired t-test.
 
 ----
 

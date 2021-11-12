@@ -23,9 +23,16 @@ def sign_test(x, y = None, md = 0, alternative = "two_sided"):
 
     med_count = st.median(np.arange(0, n_adj + 1))
     
-    if (alternative == "two_sided") and (pos_count >= med_count):
+    if (n_adj / 2) == pos_count:
+      exception = True
+    else:
+      exception = False
+    
+    if (alternative == "two_sided") and (exception == True):
+      p_val = 1
+    elif (alternative == "two_sided") and (exception == False) and (pos_count >= med_count):
       p_val = 2 * (1 - binom.cdf((pos_count - 1), n_adj, 0.5))
-    elif pos_count < med_count:
+    elif (alternative == "two_sided") and (exception == False) and (pos_count < med_count):
       p_val = 2 * binom.cdf(pos_count, n_adj, 0.5)
   
     if alternative == "greater":
@@ -46,9 +53,16 @@ def sign_test(x, y = None, md = 0, alternative = "two_sided"):
 
     med_count = st.median(np.arange(0, n_adj + 1))
 
-    if (alternative == "two_sided") and (pos_count >= med_count):
+    if (n_adj / 2) == pos_count:
+      exception = True
+    else:
+      exception = False
+
+    if (alternative == "two_sided") and (exception == True):
+      p_val = 1
+    elif (alternative == "two_sided") and (exception == False) and (pos_count >= med_count):
       p_val = 2 * (1 - binom.cdf((pos_count - 1), n_adj, 0.5))
-    elif pos_count < med_count:
+    elif (alternative == "two_sided") and (exception == False) and (pos_count < med_count):
       p_val = 2 * binom.cdf(pos_count, n_adj, 0.5)
 
     if alternative == "greater":
